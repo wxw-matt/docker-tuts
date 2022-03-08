@@ -1,0 +1,14 @@
+# Build: docker build -t go/webservice:1.0 .
+# Run: docker run -p 8080:8080 go/webservice:1.0
+
+FROM golang:1.17.8-alpine3.15 AS build
+COPY . /src/
+WORKDIR /src/
+RUN CGO_ENABLED=0 go build -o webservice
+
+#FROM alpine:3.15 for development
+FROM scratch
+WORKDIR /app
+COPY --from=build /src/webservice /app/
+EXPOSE 8080
+ENTRYPOINT ["./webservice"]

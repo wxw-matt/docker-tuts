@@ -1,0 +1,16 @@
+# https://docs.docker.com/compose/profiles/
+# https://docs.docker.com/compose/extends/
+version: '3.5'
+
+services:
+  dev:
+    profiles: ['dev']
+    build:
+      context: ./
+      dockerfile: Dockerfile-dev
+
+  app:
+    profiles: ['pro']
+    build:
+      context: ./
+      dockerfile: Dockerfile-pro

@@ -1,0 +1,27 @@
+# https://docs.docker.com/compose/profiles/
+version: '3.5'
+
+services:
+  dev:
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    working_dir: /app
+    ports:
+      - "8080:8080"
+
+    networks:
+      - network
+
+  app:
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    working_dir: /app
+    ports:
+      - "8080:8080"
+
+    networks:
+      - network
+
+networks:
+    network:
+      driver: bridge
